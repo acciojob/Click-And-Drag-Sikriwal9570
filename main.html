@@ -35,6 +35,41 @@
   </div>
 
 <script>
+	
+const items = document.querySelectorAll('.item');
+let isDragging = false;
+let startX, offsetX;
+
+items.forEach(item => {
+  item.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    item.classList.add('dragging');
+    startX = e.clientX;
+    offsetX = item.getBoundingClientRect().left - e.clientX;
+  });
+
+  item.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    const left = e.clientX + offsetX;
+    item.style.left = left + 'px';
+  });
+
+  item.addEventListener('mouseup', () => {
+    if (isDragging) {
+      item.classList.remove('dragging');
+      isDragging = false;
+    }
+  });
+
+  item.addEventListener('mouseleave', () => {
+    if (isDragging) {
+      item.classList.remove('dragging');
+      isDragging = false;
+    }
+  });
+});
+
+
 //Your code goes here 
 </script>
 
